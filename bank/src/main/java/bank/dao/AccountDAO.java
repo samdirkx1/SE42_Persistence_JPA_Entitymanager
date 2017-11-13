@@ -12,13 +12,17 @@ public interface AccountDAO {
     int count();
 
     /**
-     * The account is persisted. If a account with the same id allready exists an EntityExistsException is thrown
+     * The account is persisted. If a account with the same id allready exists
+     * an EntityExistsException is thrown
+     *
      * @param account
      */
     void create(Account account);
 
     /**
-     * Merge the state of the given account into persistant context. If the account did not exist an IllegalArgumentException is thrown
+     * Merge the state of the given account into persistant context. If the
+     * account did not exist an IllegalArgumentException is thrown
+     *
      * @param account
      */
     void edit(Account account);
@@ -39,15 +43,15 @@ public interface AccountDAO {
     /**
      *
      * @param email
-     * @return unique account instance with parameter email or null if such account doesn't exist
+     * @return unique account instance with parameter email or null if such
+     * account doesn't exist
      */
     Account findByAccountNr(Long accountNr);
 
     /**
      * Remove the entity instance
+     *
      * @param account - entity instance
      */
     void remove(Account account);
-    
-    //yo mama so fat
 }
