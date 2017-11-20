@@ -8,6 +8,9 @@ package util;
 import bank.dao.*;
 import bank.domain.*;
 import bank.service.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -64,6 +67,19 @@ public class JPATest {
         System.out.println("AccountId: " + account.getId());
         //TODO: verklaar en pas eventueel aan
         assertTrue(account.getId() > 0L);
+       
+        
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
 	
 //2	Rollback 
@@ -78,6 +94,18 @@ public class JPATest {
         assertNull(account.getId());
         em.getTransaction().rollback();
         // TODO code om te testen dat table account geen records bevat. Hint: bestudeer/gebruik AccountDAOJPAImpl
+        
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
 	
 //3	Flushen maar
@@ -98,6 +126,19 @@ public class JPATest {
         //assertEquals(expected, account.getId();
         em.getTransaction().commit();
         //TODO: verklaar en pas eventueel aan
+        
+        
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
 	
 //4	Veranderingen na de persist
@@ -121,6 +162,18 @@ public class JPATest {
         Account found = em2.find(Account.class,  cid);
         //TODO: verklaar de waarde van found.getBalance
         assertEquals(expectedBalance, found.getBalance());
+        
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
 	
 //5	Refresh
@@ -130,6 +183,17 @@ public class JPATest {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bankPU"); 
         EntityManager em = emf.createEntityManager();
         
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
     
     
@@ -205,6 +269,18 @@ public class JPATest {
         assertEquals((Long)650L,account2.getBalance()) ;  //verklaar
         em.getTransaction().commit() ;
         em.close() ;
+        
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
 
 	
@@ -233,6 +309,18 @@ public class JPATest {
         accF2 = em.find(Account.class, acc1.getId());
         assertSame(accF1, accF2);
         //TODO verklaar verschil tussen beide scenario’s
+        
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
 
 	
@@ -254,6 +342,18 @@ public class JPATest {
         Account accFound = em.find(Account.class, id);
         assertNull(accFound);
         //TODO: verklaar bovenstaande asserts
+        
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
 
 //9	Generation type
@@ -265,6 +365,17 @@ public class JPATest {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bankPU"); 
         EntityManager em = emf.createEntityManager();
         
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+//2.	Welke SQL statements worden gegenereerd?
+//3.	Wat is het eindresultaat in de database?
+//4.	Verklaring van bovenstaande drie observaties.
     }
 	
 
