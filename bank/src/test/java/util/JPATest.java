@@ -45,12 +45,6 @@ public class JPATest {
     @After
     public void tearDown() {
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     
 //1	Hoe werken persist en commit in samenhang met de database.
     @Test
@@ -76,10 +70,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }   
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
 	
 //2	Rollback 
@@ -102,10 +98,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }   
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
 	
 //3	Flushen maar
@@ -135,10 +133,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
 	
 //4	Veranderingen na de persist
@@ -170,10 +170,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
 	
 //5	Refresh
@@ -190,10 +192,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
     
     
@@ -282,10 +286,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
 
 	
@@ -322,10 +328,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
 
 	
@@ -355,10 +363,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
 
 //9	Generation type
@@ -377,11 +387,12 @@ public class JPATest {
         } catch (SQLException ex) {
             Logger.getLogger(JPATest.class.getName()).log(Level.SEVERE, null, ex);
         }
-//1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
-//2.	Welke SQL statements worden gegenereerd?
-//3.	Wat is het eindresultaat in de database?
-//4.	Verklaring van bovenstaande drie observaties.
+/*
+1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+2.	Welke SQL statements worden gegenereerd?
+3.	Wat is het eindresultaat in de database?
+4.	Verklaring van bovenstaande drie observaties.
+*/
     }
 	
-
 }
