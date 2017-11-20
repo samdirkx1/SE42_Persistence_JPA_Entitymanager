@@ -233,6 +233,11 @@ public class JPATest {
         Long balance3b = 322L;
         Long balance3c = 333L;
         acc = new Account(3L);
+
+        em.getTransaction().begin();
+        em.persist(acc);
+        em.getTransaction().commit();       
+        
         em.getTransaction().begin();
         acc2 = em.merge(acc);
         assertTrue(em.contains(acc)); // verklaar
@@ -268,7 +273,7 @@ public class JPATest {
         assertEquals((Long)650L,account.getBalance()) ;  //verklaar
         assertEquals((Long)650L,account2.getBalance()) ;  //verklaar
         em.getTransaction().commit() ;
-        em.close() ;
+//        em.close() ;
         
         //clean database and delete entities.
         DatabaseCleaner dbc = new DatabaseCleaner(em);
@@ -303,9 +308,9 @@ public class JPATest {
         accF2 = em.find(Account.class, acc1.getId());
         assertSame(accF1, accF2);
 
-        // scenario 2        
-        accF1 = em.find(Account.class, acc1.getId());
+        // scenario 2     
         em.clear();
+        accF1 = em.find(Account.class, acc1.getId());
         accF2 = em.find(Account.class, acc1.getId());
         assertSame(accF1, accF2);
         //TODO verklaar verschil tussen beide scenario’s
