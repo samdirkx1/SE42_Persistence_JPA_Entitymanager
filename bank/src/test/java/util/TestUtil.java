@@ -1,3 +1,4 @@
+package util;
 
 import bank.domain.Account;
 import javax.persistence.EntityManager;
