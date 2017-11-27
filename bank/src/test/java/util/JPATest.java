@@ -56,10 +56,17 @@ public class JPATest {
         em.getTransaction().begin();
         em.persist(account);
         //TODO: verklaar en pas eventueel aan
+        //de account heeft nog geen id bij het aanmaken in de code.
+        //--INSERT INTO ACCOUNT (ACCOUNTNR, BALANCE, THRESHOLD) VALUES (?, ?, ?)
+	//bind => [111, 0, 0]
+        //account is toegevoegd.
         assertNull(account.getId());
         em.getTransaction().commit();
         System.out.println("AccountId: " + account.getId());
         //TODO: verklaar en pas eventueel aan
+        //na de commit naar de database heeft account een id gekregen.
+        //--SELECT LAST_INSERT_ID()
+        //AccountId: 326
         assertTrue(account.getId() > 0L);
        
         
@@ -73,6 +80,7 @@ public class JPATest {
 /*
 1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
 2.	Welke SQL statements worden gegenereerd?
+        zie output tijdens debug per onderdeel 
 3.	Wat is het eindresultaat in de database?
 4.	Verklaring van bovenstaande drie observaties.
 */
@@ -90,6 +98,8 @@ public class JPATest {
         assertNull(account.getId());
         em.getTransaction().rollback();
         // TODO code om te testen dat table account geen records bevat. Hint: bestudeer/gebruik AccountDAOJPAImpl
+        AccountDAOJPAImpl accDAOimpl = new AccountDAOJPAImpl(em);
+        assertFalse(accDAOimpl.findAll().size() > 0);
         
         //clean database and delete entities.
         DatabaseCleaner dbc = new DatabaseCleaner(em);
@@ -101,6 +111,7 @@ public class JPATest {
 /*
 1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
 2.	Welke SQL statements worden gegenereerd?
+        zie output tijdens debug per onderdeel 
 3.	Wat is het eindresultaat in de database?
 4.	Verklaring van bovenstaande drie observaties.
 */
@@ -118,10 +129,12 @@ public class JPATest {
         em.getTransaction().begin();
         em.persist(account);
         //TODO: verklaar en pas eventueel aan
-        //assertNotEquals(expected, account.getId();
+        //het id is nog niet gesynced dus is het -100L
+        assertEquals(expected, account.getId());
         em.flush();
         //TODO: verklaar en pas eventueel aan
-        //assertEquals(expected, account.getId();
+        //het account en dus ook het id is gesynced dus is het geen -100L
+        assertNotEquals(expected, account.getId());
         em.getTransaction().commit();
         //TODO: verklaar en pas eventueel aan
         
@@ -136,6 +149,7 @@ public class JPATest {
 /*
 1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
 2.	Welke SQL statements worden gegenereerd?
+        zie output tijdens debug per onderdeel 
 3.	Wat is het eindresultaat in de database?
 4.	Verklaring van bovenstaande drie observaties.
 */
@@ -155,12 +169,14 @@ public class JPATest {
         em.getTransaction().commit();
         assertEquals(expectedBalance, account.getBalance());
         //TODO: verklaar de waarde van account.getBalance
+        //de balance is geset naar 400L en is gecommit bij de transaction
         Long  cid = account.getId();
         account = null;
         EntityManager em2 = emf.createEntityManager();
         em2.getTransaction().begin();
         Account found = em2.find(Account.class,  cid);
         //TODO: verklaar de waarde van found.getBalance
+        //de found is het eerste account, want het heeft hetzelfde cid als account.
         assertEquals(expectedBalance, found.getBalance());
         
         //clean database and delete entities.
@@ -173,6 +189,7 @@ public class JPATest {
 /*
 1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
 2.	Welke SQL statements worden gegenereerd?
+        zie output tijdens debug per onderdeel 
 3.	Wat is het eindresultaat in de database?
 4.	Verklaring van bovenstaande drie observaties.
 */
@@ -185,6 +202,34 @@ public class JPATest {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bankPU"); 
         EntityManager em = emf.createEntityManager();
         
+        Long expectedBalance = 400L;
+        Account account = new Account(114L);
+        em.getTransaction().begin();
+        em.persist(account);
+        account.setBalance(expectedBalance);
+        em.getTransaction().commit();
+        assertEquals(expectedBalance, account.getBalance());
+        //TODO: verklaar de waarde van account.getBalance
+        //de balance is geset naar 400L en is gecommit bij de transaction
+        Long  cid = account.getId();
+        //account = null;
+//        EntityManager em2 = emf.createEntityManager();
+        em.getTransaction().begin();
+        Account found = em.find(Account.class,  cid);
+        //TODO: verklaar de waarde van found.getBalance
+        //de found is het eerste account, want het heeft hetzelfde cid als account.
+        assertEquals(expectedBalance, found.getBalance());
+        em.getTransaction().commit();
+        
+        Long expectedBalance2 = 800L;
+        em.getTransaction().begin();
+        account.setBalance(expectedBalance2);
+        em.getTransaction().commit();
+        assertEquals(expectedBalance2, account.getBalance());
+        
+        em.refresh(found); //niet nodig, hij is al geupdate door de setbalance.
+        assertEquals(expectedBalance2, found.getBalance());
+        
         //clean database and delete entities.
         DatabaseCleaner dbc = new DatabaseCleaner(em);
         try {
@@ -195,6 +240,7 @@ public class JPATest {
 /*
 1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
 2.	Welke SQL statements worden gegenereerd?
+        zie output tijdens debug per onderdeel 
 3.	Wat is het eindresultaat in de database?
 4.	Verklaring van bovenstaande drie observaties.
 */
@@ -289,6 +335,7 @@ public class JPATest {
 /*
 1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
 2.	Welke SQL statements worden gegenereerd?
+        zie output tijdens debug per onderdeel 
 3.	Wat is het eindresultaat in de database?
 4.	Verklaring van bovenstaande drie observaties.
 */
@@ -331,6 +378,7 @@ public class JPATest {
 /*
 1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
 2.	Welke SQL statements worden gegenereerd?
+        zie output tijdens debug per onderdeel 
 3.	Wat is het eindresultaat in de database?
 4.	Verklaring van bovenstaande drie observaties.
 */
@@ -390,6 +438,7 @@ public class JPATest {
 /*
 1.	Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
 2.	Welke SQL statements worden gegenereerd?
+        zie output tijdens debug per onderdeel 
 3.	Wat is het eindresultaat in de database?
 4.	Verklaring van bovenstaande drie observaties.
 */
