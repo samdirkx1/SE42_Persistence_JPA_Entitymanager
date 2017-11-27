@@ -11,7 +11,7 @@ public class DatabaseCleaner {
         Account.class
     };
     private final EntityManager em;
-
+    
     public DatabaseCleaner(EntityManager entityManager) {
         em = entityManager;
     }
@@ -33,5 +33,5 @@ public class DatabaseCleaner {
     protected String getEntityName(Class<?> clazz) {
         EntityType et = em.getMetamodel().entity(clazz);
         return et.getName();
-    }
+    }    
 }

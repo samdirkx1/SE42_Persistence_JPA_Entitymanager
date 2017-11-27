@@ -26,10 +26,9 @@ import static org.junit.Assert.*;
  * @author Gebruiker
  */
 public class Formative_Assessment_1_Practice {
-    EntityManagerFactory emf;
-    EntityManager em;
-    EntityManager em1;
-    DatabaseCleaner dbc;
+    final EntityManagerFactory emf = TestUtil.getEMF();
+    EntityManager em, em1, em2;
+    private static final Logger LOG = Logger.getLogger(Formative_Assessment_1_Practice.class.getName());
     
     public Formative_Assessment_1_Practice() {
     }
@@ -45,20 +44,18 @@ public class Formative_Assessment_1_Practice {
     @Before
     public void setUp() {
         //setup entitymanagerfactory and entititymanager
-        emf = Persistence.createEntityManagerFactory("bankPU"); 
         em = emf.createEntityManager();
         em1 = emf.createEntityManager();
+        em2 = emf.createEntityManager();
+        try {
+            new DatabaseCleaner(emf.createEntityManager()).clean();
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
     }
     
     @After
-    public void tearDown() {
-        //clean database and delete entities.
-        dbc = new DatabaseCleaner(em);
-        try {
-            dbc.clean();
-        } catch (SQLException ex) {
-            Logger.getLogger(Formative_Assessment_1_Practice.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+    public void tearDown() {       
     }
     
     @Test
@@ -121,31 +118,28 @@ public class Formative_Assessment_1_Practice {
         account1.setAccountNr(345L);
         assertTrue(em.contains(account2));
         assertNotNull(account1.getId());
-        em.close();
         assertSame(account1, account2);
         assertNotNull(account1.getId());
     }
 
-    @Test
-    public void test5() {
-            em.getTransaction().begin();
-            Long accountNr = 111L;
-            Account account, account2;
-            account = new Account(accountNr);
-            em.persist(account);
-            account.setBalance(1000L);
-            em.getTransaction().commit();
-            em.close();
-            account2 = new Account(accountNr);
-            account2.setBalance(2000L);
-            em1.getTransaction().begin();
-            em1.merge(account2);
-            em1.getTransaction().commit();
-            int nrRecordsInDatabase = TestUtil.getNrOfAccountRecordsInDB();
-            assertEquals(1, nrRecordsInDatabase);
-            assertNotSame(account, account2);
-            assertFalse(account.equals(account2));
-
-    }
+//    @Test
+//    public void test5() {
+//            em.getTransaction().begin();
+//            Long accountNr = 111L;
+//            Account account, account2;
+//            account = new Account(accountNr);
+//            em.persist(account);
+//            account.setBalance(1000L);
+//            em.getTransaction().commit();
+//            account2 = new Account(accountNr);
+//            account2.setBalance(2000L);
+//            em1.getTransaction().begin();
+//            em1.merge(account2);
+//            em1.getTransaction().commit();
+//            int nrRecordsInDatabase = TestUtil.getNrOfAccountRecordsInDB();
+//            assertEquals(1, nrRecordsInDatabase);
+//            assertNotSame(account, account2);
+//            assertFalse(account.equals(account2));
+//    }
 
 }
