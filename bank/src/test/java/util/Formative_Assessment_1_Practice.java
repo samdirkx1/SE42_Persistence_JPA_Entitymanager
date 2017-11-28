@@ -122,24 +122,44 @@ public class Formative_Assessment_1_Practice {
         assertNotNull(account1.getId());
     }
 
+    @Test
+    public void test5() {
+            em.getTransaction().begin();
+            Long accountNr = 111L;
+            Account account, account2;
+            account = new Account(accountNr);
+            em.persist(account);
+            account.setBalance(1000L);
+            em.getTransaction().commit();
+            account2 = new Account(accountNr);
+            account2.setBalance(2000L);
+            em1.getTransaction().begin();
+            em1.merge(account2);
+            em1.getTransaction().commit();
+            int nrRecordsInDatabase = TestUtil.getNrOfAccountRecordsInDB();
+            assertEquals(1, nrRecordsInDatabase);
+            assertNotSame(account, account2);
+            assertFalse(account.equals(account2));
+    }
+//
 //    @Test
-//    public void test5() {
-//            em.getTransaction().begin();
-//            Long accountNr = 111L;
-//            Account account, account2;
-//            account = new Account(accountNr);
-//            em.persist(account);
-//            account.setBalance(1000L);
-//            em.getTransaction().commit();
-//            account2 = new Account(accountNr);
-//            account2.setBalance(2000L);
-//            em1.getTransaction().begin();
-//            em1.merge(account2);
-//            em1.getTransaction().commit();
-//            int nrRecordsInDatabase = TestUtil.getNrOfAccountRecordsInDB();
-//            assertEquals(1, nrRecordsInDatabase);
-//            assertNotSame(account, account2);
-//            assertFalse(account.equals(account2));
-//    }
-
+//     public void test2Toets() {
+//        int a = 0;
+//    Long studentNr = 111L;
+//    Account student, student2;
+//    int grade = 1;
+//    student = new Account();
+//
+//    em.getTransaction().begin();
+//    em.persist(student);
+//    em.getTransaction().commit();
+//
+//    em1.getTransaction().begin();
+//    student2 = em1.find(Account.class, student.getId());
+//    em1.remove(student2);
+//
+//    em1.getTransaction().commit();
+//    assertEquals(0, TestUtil.getNrOfAccountRecordsInDB());
+//
+//     }
 }

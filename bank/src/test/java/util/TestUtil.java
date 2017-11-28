@@ -11,7 +11,7 @@ public class TestUtil {
 
     /**
      *
-     * @return the number of Accounts stored in the database
+     * @return the number of Account1s stored in the database
      */
     static public int getNrOfAccountRecordsInDB() {
         EntityManager em = getEMF().createEntityManager();
@@ -22,7 +22,7 @@ public class TestUtil {
      * Search for an entity of the specified class and primary key.
      *
      * @param id
-     * @return the found Account instance or null if the entity does not exist
+     * @return the found Account1 instance or null if the entity does not exist
      */
     static public Account getAccountById(Long id) {
         EntityManager em = getEMF().createEntityManager();
