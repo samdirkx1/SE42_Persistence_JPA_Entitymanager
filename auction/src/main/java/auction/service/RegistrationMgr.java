@@ -2,15 +2,27 @@ package auction.service;
 
 import java.util.*;
 import auction.domain.User;
-import auction.dao.UserDAOCollectionImpl;
 import auction.dao.UserDAO;
+import auction.dao.UserDAOJPAImpl;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import nl.fontys.util.DatabaseCleaner;
 
 public class RegistrationMgr {
+    
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU"); 
+
+    private EntityManager em;
 
     private UserDAO userDAO;
 
     public RegistrationMgr() {
-        userDAO = new UserDAOCollectionImpl();
+        em = emf.createEntityManager();
+        userDAO = new UserDAOJPAImpl(em);
     }
 
     /**
@@ -73,5 +85,16 @@ public class RegistrationMgr {
 
     public void remove(User user) {
         userDAO.remove(user);
+    }
+    
+    public void cleanDatabase() {
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            ex.getMessage();
+//            Logger.getLogger(JPARegistrationMgrTest.class.getName()).log(Level.SEVERE, null, ex);
+        }         
     }
 }
