@@ -50,4 +50,28 @@ public class RegistrationMgr {
     public List<User> getUsers() {
         return userDAO.findAll();
     }
+    
+    public int count() {
+        return userDAO.count();
+    }
+
+    public void create(User user) {
+        userDAO.create(user);
+    }
+
+    public void edit(User user) {
+        userDAO.edit(user);
+    }
+
+    public List<User> findAll() {
+        return userDAO.findAll();
+    }
+
+    public User findByEmail(String email) {
+        return userDAO.findByEmail(email);
+    }
+
+    public void remove(User user) {
+        userDAO.remove(user);
+    }
 }
