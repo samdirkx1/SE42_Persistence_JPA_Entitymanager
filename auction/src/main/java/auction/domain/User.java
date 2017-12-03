@@ -1,12 +1,7 @@
 package auction.domain;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
 @Entity
 @NamedQueries({
@@ -16,7 +11,8 @@ import javax.persistence.NamedQuery;
 })
 public class User implements Serializable{
     
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long Id;
     @Column(unique = true)
     private String email;

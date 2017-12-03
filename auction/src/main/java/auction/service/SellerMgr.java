@@ -1,11 +1,32 @@
 package auction.service;
 
+import auction.dao.ItemDAO;
+import auction.dao.ItemDAOJPAImpl;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class SellerMgr {
 
+    private EntityManagerFactory emf;
+    private EntityManager em;
+    private ItemDAO dao;
+    
+    public SellerMgr()
+    {
+        try {
+            emf = Persistence.createEntityManagerFactory("auctionPU"); 
+            em = emf.createEntityManager();
+            dao = new ItemDAOJPAImpl(em);
+        }
+        catch(Exception ex) {
+            System.out.println("SELLERMGR createEntityManagerFactory(auctionPU) ERROR --> " + ex.getMessage());
+        }
+    }
+    
     /**
      * @param seller
      * @param cat
@@ -13,9 +34,13 @@ public class SellerMgr {
      * @return het item aangeboden door seller, behorende tot de categorie cat
      *         en met de beschrijving description
      */
+    
     public Item offerItem(User seller, Category cat, String description) {
         // TODO 
-        return null;
+        Item i = new Item(seller, cat, description);
+       dao.create(i);
+        
+        return i;
     }
     
      /**
@@ -24,7 +49,13 @@ public class SellerMgr {
      *         false als er al geboden was op het item.
      */
     public boolean revokeItem(Item item) {
-        // TODO 
+        
+        if(item.getHighest() == null)
+        {
+            dao.remove(item);
+            return true;
+        }
+        
         return false;
     }
 }

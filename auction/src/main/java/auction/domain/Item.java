@@ -1,11 +1,7 @@
 package auction.domain;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import nl.fontys.util.Money;
 
 @Entity
@@ -16,7 +12,8 @@ import nl.fontys.util.Money;
     @NamedQuery(name = "Item.findById", query = "select i from Item i where i.Id = :Id"),
 })public class Item implements Comparable, Serializable {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long Id;
     private User seller;
     private Category category;
