@@ -15,6 +15,10 @@ public class User {
         this.email = email;
 
     }
+    
+    //dummy constructor for JPA manager
+    public User() {
+    }
 
     public String getEmail() {
         return email;

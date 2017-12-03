@@ -14,13 +14,19 @@ import nl.fontys.util.DatabaseCleaner;
 
 public class RegistrationMgr {
     
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU"); 
+    EntityManagerFactory emf;
 
     private EntityManager em;
 
     private UserDAO userDAO;
 
     public RegistrationMgr() {
+        try {
+            emf = Persistence.createEntityManagerFactory("auctionPU"); 
+        }
+        catch(Exception ex) {
+            System.out.println(ex.getMessage());
+        }
         em = emf.createEntityManager();
         userDAO = new UserDAOJPAImpl(em);
     }
@@ -93,8 +99,7 @@ public class RegistrationMgr {
         try {
             dbc.clean();
         } catch (SQLException ex) {
-            ex.getMessage();
-//            Logger.getLogger(JPARegistrationMgrTest.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }         
     }
 }
