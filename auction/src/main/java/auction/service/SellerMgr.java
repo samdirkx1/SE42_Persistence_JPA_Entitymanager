@@ -5,9 +5,11 @@ import auction.dao.ItemDAOJPAImpl;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
+import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import nl.fontys.util.DatabaseCleaner;
 
 public class SellerMgr {
 
@@ -57,5 +59,15 @@ public class SellerMgr {
         }
         
         return false;
+    }
+    
+    public void cleanDatabase() {
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }         
     }
 }

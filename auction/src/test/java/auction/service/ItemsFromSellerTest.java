@@ -33,7 +33,18 @@ public class ItemsFromSellerTest {
 //    
 //    @After
 //    public void tearDown() {
-//        registrationMgr.cleanDatabase();
+//        try {
+//            auctionMgr.cleanDatabase();
+//        } catch (Exception ex) {
+//        }
+//        try {
+//            sellerMgr.cleanDatabase();
+//        } catch (Exception ex) {
+//        }
+//        try {
+//            registrationMgr.cleanDatabase();
+//        } catch (Exception ex) {
+//        }
 //    }
 //
 //    @Test

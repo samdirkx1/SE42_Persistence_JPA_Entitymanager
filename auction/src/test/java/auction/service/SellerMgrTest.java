@@ -29,7 +29,18 @@ public class SellerMgrTest {
     
     @After
     public void tearDown() {
-        registrationMgr.cleanDatabase();
+        try {
+            auctionMgr.cleanDatabase();
+        } catch (Exception ex) {
+        }
+        try {
+            sellerMgr.cleanDatabase();
+        } catch (Exception ex) {
+        }
+        try {
+            registrationMgr.cleanDatabase();
+        } catch (Exception ex) {
+        }
     }
 
     /**
@@ -72,10 +83,7 @@ public class SellerMgrTest {
         boolean res2 = sellerMgr.revokeItem(item2);
         assertFalse(res2);
         int count2 = auctionMgr.findItemByDescription(omsch2).size();
-        assertEquals(1, count2);
-        
-        
-        
+        assertEquals(1, count2);        
         
     }
 

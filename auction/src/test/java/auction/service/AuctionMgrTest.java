@@ -12,6 +12,7 @@ import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 
 public class AuctionMgrTest {
@@ -29,7 +30,18 @@ public class AuctionMgrTest {
     
     @After
     public void tearDown() {
-        registrationMgr.cleanDatabase();
+        try {
+            auctionMgr.cleanDatabase();
+        } catch (Exception ex) {
+        }
+        try {
+            sellerMgr.cleanDatabase();
+        } catch (Exception ex) {
+        }
+        try {
+            registrationMgr.cleanDatabase();
+        } catch (Exception ex) {
+        }
     }
 
     @Test
@@ -59,17 +71,15 @@ public class AuctionMgrTest {
         Item item1 = sellerMgr.offerItem(seller3, cat, omsch);
         Item item2 = sellerMgr.offerItem(seller4, cat, omsch);
 
-        ArrayList<Item> res = (ArrayList<Item>) auctionMgr.findItemByDescription(omsch2);
+        List<Item> res = auctionMgr.findItemByDescription(omsch2);
         assertEquals(0, res.size());
 
-        res = (ArrayList<Item>) auctionMgr.findItemByDescription(omsch);
+        res = (List<Item>) auctionMgr.findItemByDescription(omsch);
         assertEquals(2, res.size());
-
     }
 
     @Test
     public void newBid() {
-
         String email = "ss2@nl";
         String emailb = "bb@nl";
         String emailb2 = "bb2@nl";

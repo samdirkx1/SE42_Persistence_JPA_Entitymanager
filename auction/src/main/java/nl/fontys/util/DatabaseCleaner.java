@@ -1,5 +1,7 @@
 package nl.fontys.util;
 
+import auction.domain.Bid;
+import auction.domain.Item;
 import auction.domain.User;
 import java.sql.SQLException;
 import javax.persistence.EntityManager;
@@ -8,6 +10,8 @@ import javax.persistence.metamodel.EntityType;
 public class DatabaseCleaner {
 
     private static final Class<?>[] ENTITY_TYPES = {
+        Item.class,
+        Bid.class,
         User.class
     };
     private final EntityManager em;
@@ -20,7 +24,11 @@ public class DatabaseCleaner {
         em.getTransaction().begin();
 
         for (Class<?> entityType : ENTITY_TYPES) {
-            deleteEntities(entityType);
+            try {
+                deleteEntities(entityType);
+            }
+            catch (Exception ex) {
+            }
         }
         em.getTransaction().commit();
         em.close();

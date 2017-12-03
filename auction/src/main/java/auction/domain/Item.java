@@ -15,9 +15,11 @@ import nl.fontys.util.Money;
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long Id;
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User seller;
     private Category category;
     private String description;
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Bid highest;
     
     //constructor for JPA manager

@@ -6,10 +6,12 @@ import nl.fontys.util.Money;
 import auction.domain.Bid;
 import auction.domain.Item;
 import auction.domain.User;
+import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import nl.fontys.util.DatabaseCleaner;
 
 public class AuctionMgr  {
 
@@ -55,7 +57,19 @@ public class AuctionMgr  {
      *         amount niet hoger was dan het laatste bod, dan null
      */
     public Bid newBid(Item item, User buyer, Money amount) {
-        item.newBid(buyer, amount);
-        return item.getHighest();
+        if(item.getHighest() == null || amount.compareTo(item.getHighest().getAmount()) > 0) {        
+            return item.newBid(buyer, amount); 
+        }
+        return null;
+    }
+    
+    public void cleanDatabase() {
+        //clean database and delete entities.
+        DatabaseCleaner dbc = new DatabaseCleaner(em);
+        try {
+            dbc.clean();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }         
     }
 }
