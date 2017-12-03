@@ -23,12 +23,12 @@ public class RegistrationMgr {
     public RegistrationMgr() {
         try {
             emf = Persistence.createEntityManagerFactory("auctionPU"); 
+            em = emf.createEntityManager();
+            userDAO = new UserDAOJPAImpl(em);
         }
         catch(Exception ex) {
             System.out.println("REGISTRATIONMGR createEntityManagerFactory(auctionPU) ERROR --> " + ex.getMessage());
         }
-        em = emf.createEntityManager();
-        userDAO = new UserDAOJPAImpl(em);
     }
 
     /**

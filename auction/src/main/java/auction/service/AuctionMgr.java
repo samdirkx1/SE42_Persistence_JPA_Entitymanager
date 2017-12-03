@@ -12,32 +12,30 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class AuctionMgr  {
-    
-    EntityManagerFactory emf;
 
+    private EntityManagerFactory emf;
     private EntityManager em;
-
-    private ItemDAO itemDAO;
-
-    public AuctionMgr() {
+    private ItemDAO dao;
+    
+    public AuctionMgr()
+    {
         try {
             emf = Persistence.createEntityManagerFactory("auctionPU"); 
+            em = emf.createEntityManager();
+            dao = new ItemDAOJPAImpl(em);
         }
         catch(Exception ex) {
-            System.out.println("REGISTRATIONMGR createEntityManagerFactory(auctionPU) ERROR --> " + ex.getMessage());
+            System.out.println("AUCTIOMGR createEntityManagerFactory(auctionPU) ERROR --> " + ex.getMessage());
         }
-        em = emf.createEntityManager();
-        itemDAO = new ItemDAOJPAImpl(em);    
     }
-
-
+    
    /**
      * @param id
      * @return het item met deze id; als dit item niet bekend is wordt er null
      *         geretourneerd
      */
     public Item getItem(Long id) {
-        return itemDAO.find(id);
+        return dao.find(id);
     }
 
   
@@ -46,7 +44,7 @@ public class AuctionMgr  {
      * @return een lijst met items met @desciption. Eventueel lege lijst.
      */
     public List<Item> findItemByDescription(String description) {
-        return itemDAO.findByDescription(description);
+        return dao.findByDescription(description);
     }
 
     /**
@@ -57,7 +55,7 @@ public class AuctionMgr  {
      *         amount niet hoger was dan het laatste bod, dan null
      */
     public Bid newBid(Item item, User buyer, Money amount) {
-        // TODO 
-        return null;
+        item.newBid(buyer, amount);
+        return item.getHighest();
     }
 }
