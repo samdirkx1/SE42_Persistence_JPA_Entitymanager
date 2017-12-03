@@ -25,7 +25,7 @@ public class RegistrationMgr {
             emf = Persistence.createEntityManagerFactory("auctionPU"); 
         }
         catch(Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("REGISTRATIONMGR createEntityManagerFactory(auctionPU) ERROR --> " + ex.getMessage());
         }
         em = emf.createEntityManager();
         userDAO = new UserDAOJPAImpl(em);
