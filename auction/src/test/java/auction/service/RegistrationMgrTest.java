@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import auction.domain.User;
+import org.junit.After;
 
 public class RegistrationMgrTest {
 
@@ -16,6 +17,11 @@ public class RegistrationMgrTest {
     @Before
     public void setUp() throws Exception {
         registrationMgr = new RegistrationMgr();
+    }
+    
+    @After
+    public void tearDown() {
+        registrationMgr.cleanDatabase();
     }
 
     @Test

@@ -12,6 +12,7 @@ import org.junit.Test;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
+import org.junit.After;
 
 public class SellerMgrTest {
 
@@ -24,6 +25,11 @@ public class SellerMgrTest {
         registrationMgr = new RegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
+    }
+    
+    @After
+    public void tearDown() {
+        registrationMgr.cleanDatabase();
     }
 
     /**

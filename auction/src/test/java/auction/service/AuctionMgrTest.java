@@ -12,6 +12,7 @@ import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
 import java.util.ArrayList;
+import org.junit.After;
 
 public class AuctionMgrTest {
 
@@ -24,6 +25,11 @@ public class AuctionMgrTest {
         registrationMgr = new RegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
+    }
+    
+    @After
+    public void tearDown() {
+        registrationMgr.cleanDatabase();
     }
 
     @Test

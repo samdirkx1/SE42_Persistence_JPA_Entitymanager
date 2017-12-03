@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "User.getAll", query = "select u from User u"),
     @NamedQuery(name = "User.count", query = "select count(u) as userCount from User u"),
-    @NamedQuery(name = "User.findByEmail", query = "select u from User as u where u.email = :email"),
+    @NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = :email"),
 })
 public class User implements Serializable{
     
