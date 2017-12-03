@@ -54,7 +54,7 @@ public class ItemDAOJPAImpl implements ItemDAO{
      */
     @Override
     public Item find(Long id) {
-        Query q = em.createNamedQuery("Item.findByID", Item.class);
+        Query q = em.createNamedQuery("Item.findById", Item.class);
         q.setParameter("Id", id);
         try {
             return (Item) q.getSingleResult();

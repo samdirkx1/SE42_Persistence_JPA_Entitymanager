@@ -1,13 +1,35 @@
 package auction.service;
 
+import auction.dao.ItemDAO;
+import auction.dao.ItemDAOJPAImpl;
 import nl.fontys.util.Money;
 import auction.domain.Bid;
 import auction.domain.Item;
 import auction.domain.User;
-import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class AuctionMgr  {
+    
+    EntityManagerFactory emf;
+
+    private EntityManager em;
+
+    private ItemDAO itemDAO;
+
+    public AuctionMgr() {
+        try {
+            emf = Persistence.createEntityManagerFactory("auctionPU"); 
+        }
+        catch(Exception ex) {
+            System.out.println("REGISTRATIONMGR createEntityManagerFactory(auctionPU) ERROR --> " + ex.getMessage());
+        }
+        em = emf.createEntityManager();
+        itemDAO = new ItemDAOJPAImpl(em);    
+    }
+
 
    /**
      * @param id
@@ -15,8 +37,7 @@ public class AuctionMgr  {
      *         geretourneerd
      */
     public Item getItem(Long id) {
-        // TODO
-        return null;
+        return itemDAO.find(id);
     }
 
   
@@ -25,8 +46,7 @@ public class AuctionMgr  {
      * @return een lijst met items met @desciption. Eventueel lege lijst.
      */
     public List<Item> findItemByDescription(String description) {
-        // TODO
-        return new ArrayList<Item>();
+        return itemDAO.findByDescription(description);
     }
 
     /**
