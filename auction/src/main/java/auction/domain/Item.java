@@ -10,7 +10,9 @@ import nl.fontys.util.Money;
     @NamedQuery(name = "Item.count", query = "select count(i) as itemCount from Item i"),
     @NamedQuery(name = "Item.findByDescription", query = "select i from Item i where i.description = :description"),
     @NamedQuery(name = "Item.findById", query = "select i from Item i where i.Id = :Id"),
-})public class Item implements Comparable, Serializable {
+})
+@Inheritance (strategy = InheritanceType.JOINED)
+public abstract class Item implements Comparable, Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)

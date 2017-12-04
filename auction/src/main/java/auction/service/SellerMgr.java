@@ -3,7 +3,9 @@ package auction.service;
 import auction.dao.ItemDAO;
 import auction.dao.ItemDAOJPAImpl;
 import auction.domain.Category;
+import auction.domain.Furniture;
 import auction.domain.Item;
+import auction.domain.Painting;
 import auction.domain.User;
 import java.sql.SQLException;
 import java.util.Map;
@@ -30,20 +32,35 @@ public class SellerMgr {
             System.out.println("SELLERMGR createEntityManagerFactory(auctionPU) ERROR --> " + ex.getMessage());
         }
     }
+
+//eruit commenten als item abstract is    
+//    /**
+//     * @param seller
+//     * @param cat
+//     * @param description
+//     * @return het item aangeboden door seller, behorende tot de categorie cat
+//     *         en met de beschrijving description
+//     */
+//    
+//    public Item offerItem(User seller, Category cat, String description) {
+//        // TODO 
+//       Item i = new Item(seller, cat, description);
+//       dao.create(i);
+//        
+//        return i;
+//    }
     
-    /**
-     * @param seller
-     * @param cat
-     * @param description
-     * @return het item aangeboden door seller, behorende tot de categorie cat
-     *         en met de beschrijving description
-     */
-    
-    public Item offerItem(User seller, Category cat, String description) {
-        // TODO 
-       Item i = new Item(seller, cat, description);
-       dao.create(i);
-        
+    Item offerFurniture(User seller, Category cat, String omsch, String material)
+    {
+        Item i = new Furniture(material, seller, cat, omsch);        
+        dao.create(i);
+        return i;
+    }
+
+    Item offerPainting(User seller, Category cat, String omsch, String title, String painter)
+    {
+        Item i = new Painting(title, painter, seller, cat, omsch);
+        dao.create(i);
         return i;
     }
     

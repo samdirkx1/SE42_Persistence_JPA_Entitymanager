@@ -3,6 +3,7 @@ package auction.dao;
 import auction.domain.Item;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
