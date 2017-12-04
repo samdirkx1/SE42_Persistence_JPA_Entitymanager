@@ -17,6 +17,10 @@ import nl.fontys.util.Money;
     private Long Id;
     @ManyToOne(cascade = CascadeType.MERGE)
     private User seller;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "description", column = @Column(name = "category"))
+    })
     private Category category;
     private String description;
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -30,6 +34,7 @@ import nl.fontys.util.Money;
         this.seller = seller;
         this.category = category;
         this.description = description;
+        seller.addItem(this);
     }
 
     public Long getId() {
@@ -92,12 +97,22 @@ import nl.fontys.util.Money;
     }
 
     public boolean equals(Object o) {
-        //TODO
-        return false;
+        if(o == null) { return false; }
+        if(o == this) { return true; }
+        if(!(o instanceof Item)) { return false; }
+        Item otherItem = (Item) o;
+
+        if(otherItem.getId() != this.getId()) { return false; }
+        if(otherItem.getDescription() != this.getDescription()) { return false; }
+        if(otherItem.getHighestBid().getAmount().getCents() != this.getHighestBid().getAmount().getCents()) { return false; }
+
+        return true;
     }
 
     public int hashCode() {
-        //TODO
-        return 0;
+        int hashCode = 1;
+        hashCode = hashCode * 12 + (this.seller.getEmail().hashCode());
+        hashCode = hashCode * 13 + (this.getDescription().hashCode());
+        return hashCode;
     }
 }

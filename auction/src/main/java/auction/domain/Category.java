@@ -1,8 +1,10 @@
 package auction.domain;
 
 import java.io.Serializable;
+import javax.persistence.Embeddable;
 
-public class Category implements Serializable{
+@Embeddable
+public class Category{
 
     private String description;
 

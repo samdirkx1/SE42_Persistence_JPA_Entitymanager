@@ -6,6 +6,8 @@ import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
 import java.sql.SQLException;
+import java.util.Map;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -39,7 +41,7 @@ public class SellerMgr {
     
     public Item offerItem(User seller, Category cat, String description) {
         // TODO 
-        Item i = new Item(seller, cat, description);
+       Item i = new Item(seller, cat, description);
        dao.create(i);
         
         return i;
@@ -51,15 +53,30 @@ public class SellerMgr {
      *         false als er al geboden was op het item.
      */
     public boolean revokeItem(Item item) {
-        
         if(item.getHighest() == null)
         {
             dao.remove(item);
             return true;
         }
-        
+
         return false;
     }
+    
+//     /**
+//     * @param item
+//     * @return true als er nog niet geboden is op het item. Het item word verwijderd.
+//     *         false als er al geboden was op het item.
+//     */
+//    public Set<Map> getOfferedItems(Integer id) {
+//        
+//        if(item.getHighest() == null)
+//        {
+//            dao.remove(item);
+//            return true;
+//        }
+//        
+//        return false;
+//    }
     
     public void cleanDatabase() {
         //clean database and delete entities.

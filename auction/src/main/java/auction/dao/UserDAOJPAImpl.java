@@ -2,6 +2,8 @@ package auction.dao;
 
 import auction.domain.User;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -65,5 +67,16 @@ public class UserDAOJPAImpl implements UserDAO {
         em.getTransaction().begin();
         em.remove(em.merge(user));
         em.getTransaction().commit();
+    }
+    
+    public Set<Map> findOfferedItems() {
+        Query q = em.createNamedQuery("User.getOfferedItems", User.class);
+        try {
+            return (Set<Map>) q.getResultList();        
+        }
+        catch (NoResultException ex) {
+            return null;
+        }
+
     }
 }
